@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { evaluateHandoff, classifyExternalText } from "./policy.js";
-import { decodeProposal } from "./model-adapter.js";
+import { evaluateHandoff, classifyExternalText } from "../src/policy.js";
+import { decodeProposal } from "../src/model-adapter.js";
 
 const grant = { recipient: "finance-agent", dataTypes: ["invoice-total"], actions: ["summarize"] };
 

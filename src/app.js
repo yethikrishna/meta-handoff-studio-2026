@@ -93,6 +93,30 @@ analyzeButton.addEventListener("click", () => {
   appendLedger(readableProposal(proposal), result.status);
 });
 
+$("#ask-model").addEventListener("click", async () => {
+  const button = $("#ask-model");
+  const output = $("#model-result");
+  const text = $("#model-output");
+  button.disabled = true;
+  output.className = "model-result";
+  output.textContent = "Requesting a proposal from Meta Llama 3.2 1B Instruct…";
+  try {
+    const response = await fetch("/api/propose", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ prompt: $("#model-prompt").value }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "model_request_failed");
+    text.value = JSON.stringify(data.proposal);
+    output.textContent = `Proposal received from ${data.model}; it is untrusted until independently checked. No handoff was executed.`;
+  } catch (error) {
+    output.textContent = `Request failed (${error.message}). Run locally in Cloudflare Workers with the AI binding; no action was taken.`;
+  } finally {
+    button.disabled = false;
+  }
+});
+
 $("#validate-model").addEventListener("click", () => {
   const result = decodeProposal($("#model-output").value);
   const output = $("#model-result");

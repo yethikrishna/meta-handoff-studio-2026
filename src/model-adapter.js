@@ -121,4 +121,4 @@ export async function suggestPlan({ prompt, invoke }) {
   });
   const raw = typeof result === "string" ? result : result?.response ?? result?.result?.response ?? "";
   return decodeProposal(raw);
-  }
+}
