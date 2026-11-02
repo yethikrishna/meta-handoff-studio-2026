@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import worker, { MODEL_ID } from "../src/worker.js";
+import worker from "../src/worker.js";
+const MODEL_ID = "@cf/meta/llama-3.2-1b-instruct";
 
 function req(path, method = "POST", body = {}, headers = { "content-type": "application/json" }) {
   return new Request(`https://handoff.example${path}`, { method, headers, body: method === "GET" ? undefined : JSON.stringify(body) });

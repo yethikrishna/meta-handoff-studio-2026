@@ -4,9 +4,7 @@
   "main": "src/worker.js",
   "compatibility_date": "2026-10-27",
   "ai": { "binding": "AI" },
-  "assets": {
-    "directory": "./public",
-    "binding": "ASSETS",
-    "run_worker_first": ["/api/*"]
-  }
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "d1_databases": [{ "binding": "DB", "database_name": "meta-handoff-studio", "database_id": "ad74d8d8-5ad7-4143-bc20-931ca4f2f2f4", "migrations_dir": "migrations" }],
+  "ratelimits": [{ "name": "LIMITS", "namespace_id": "2026110201", "simple": { "limit": 10, "period": 60 } }]
 }

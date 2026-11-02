@@ -1,18 +1,28 @@
-# Handoff Studio demo notes
+# Handoff Studio: synthetic demo narration (draft)
 
-## Positioning
-A local prototype for checking whether a proposed agent handoff fits a declared grant. It does not authenticate grants, send data, or persist an audit ledger. Its optional model endpoint calls Meta Llama 3.2 1B Instruct via a server-side Cloudflare Workers AI binding and only returns a validated proposal. The grant and request are synthetic fixtures. The external-text flag is a display heuristic only; all external text remains untrusted.
+Target runtime is about 3 minutes at a measured, natural pace. Record only against the final verified preview; this draft describes the local UI with sign-in controls removed. The product examples are entirely synthetic.
 
-## Three-minute walkthrough
-1. (0:00–0:25) Point out the synthetic requester, bounded request, and explicit fixture grant: finance-agent, invoice-total only, summarize. The gate evaluates supplied values; it does not authenticate their source.
-2. (0:25–1:05) Keep the default proposed handoff to an external recipient with invoice and bank details, send. Run the scope check. Explain that the proposal falls outside recipient, data, and action scope; it is held for owner approval. Show the per-field match/mismatch badges, trace, and session-local row.
-3. (1:05–1:35) Select finance-agent, invoice-total only, summarize, then rerun. Explain this is a synthetic scope match only, not a message send. The policy gate compares the proposal to the explicit fixture grant independently.
-4. (1:35–1:55) Change action to send. Rerun and show it is held even though recipient and data still match.
-5. (1:55–2:35) Enter synthetic text in the Meta prompt box and request a proposal from Meta Llama 3.2 1B Instruct through the server-side Workers AI binding. Show the returned proposal; validate it and run the independent scope check. Note that this is only a proposal, not permission or a handoff.
-6. (2:35–3:00) Close with the limits: synthetic grant only, non-durable session ledger, no external action, and the direct Workers AI endpoint has returned one exact synthetic JSON response, but the Worker itself is not deployed and varied-prompt model quality is not established. Playground and one API spot check are not a broad quality claim. See `EVAL.md`.
+**0:00-0:25 | What this is**
+Handoff Studio is a prototype for checking whether a proposed AI-agent handoff fits a declared permission scope. The demo uses synthetic data and does not send or execute a handoff. I will walk through an overbroad proposal, a matching scope fixture, untrusted text, and the deliberately disabled private workspace.
 
-## Judging-proof points to build next
-- Add an evaluation set with legitimate-but-out-of-scope, explicit approval match/mismatch, external prompt-injection variants, malformed model output, and ambiguous grants.
-- Capture reproducible model prompts, unmodified outputs, latency, and parser outcomes across varied scenarios without using private data.
-- Deploy and test the server-side binding, then capture latency and fail-closed behavior across a varied synthetic evaluation set. Never place a long-lived API token in browser JavaScript.
-- Replace the synthetic gate with authenticated, provenance-carrying grant records and a durable append-only audit backend before claiming a production policy engine.
+**0:25-0:55 | Held proposal**
+The request asks for an invoice total. The synthetic grant allows the finance agent to summarize only that total. The proposed action would send the full invoice and bank details to an outside recipient. The deterministic check compares recipient, data scope, and action. They fall outside the fixture, so the result is held for owner approval. Nothing is sent. A model suggestion cannot grant itself permission.
+
+**0:55-1:23 | Scope match**
+I change the proposal to the matching recipient, invoice total only, and summarize. The gate reports a scope match. The trace shows that the proposal is not authority, and that no external action was executed. This means only that the supplied values match this synthetic fixture. It does not authenticate a real grant or authorize a real handoff.
+
+**1:23-1:47 | Untrusted text**
+The request also contains an instruction to send the full document outside. The app treats that text as untrusted. The visible pattern detector is just a display hint, not the safety boundary. The policy decision comes from comparing the declared scope, not from the heuristic.
+
+**1:47-2:12 | Proposal model**
+The model endpoint can propose a structured recipient, data scope, and action through a server-side Workers AI binding. Its output is parsed strictly and remains untrusted. The deterministic gate checks it independently. The model cannot create the grant or execute a handoff. Do not enter real personal, financial, or confidential data into this demo.
+
+**2:12-2:38 | Why sign-in is disabled**
+The public fallback does not show a sign-in field, send-code button, or save control. No email is requested or sent. The Worker contains experimental email-code and D1-backed account code, but no usable free public mail route is configured. Locally, 33 automated tests pass, including mock account-isolation checks. Those tests do not establish a live sign-in or real-user isolation.
+
+**2:38-3:00 | Close**
+The product is an early prototype using synthetic examples. It has no live-user accounts and no external handoff action. The next step for a real account service is a verified free email sender domain and then live integration and isolation checks.
+
+## Verified demo limits
+
+The sample grant and request are synthetic; their source is not authenticated. The policy function checks supplied values and never sends a handoff. Local mock tests cover account/session and isolation behavior, but not live email, live D1, or real-user behavior. The public fallback has sign-in disabled.

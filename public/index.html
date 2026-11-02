@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101521"><title>Handoff Studio</title>
+<meta name="theme-color" content="#f4f6fa"><title>Handoff Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -11,7 +11,7 @@
 <div class="shell">
   <aside class="rail"><div class="mark">H<span>·</span></div><div class="rail-icon active">◈</div><div class="rail-icon">⌘</div><div class="rail-bottom">HS</div></aside>
   <main>
-    <header><div><div class="eyebrow">HACKATHON BUILD · DAY 1 <span>27 OCT 2026 · 22 TESTS</span></div><h1>Handoff Studio</h1></div><div class="header-right"><span class="live-dot"></span><span>WORKER PROTOTYPE · API SPOT-CHECKED</span><button class="icon-btn" aria-label="Settings">⚙</button></div></header>
+    <header><div><div class="eyebrow">META GLOBAL AI DEVELOPER HACKATHON <span>LOCAL TESTED BUILD · 33 TESTS</span></div><h1>Handoff Studio</h1></div><div class="header-right"><span class="live-dot"></span><span>SIGN-IN DISABLED · SYNTHETIC MODE</span><button class="icon-btn" aria-label="Settings">⚙</button></div></header>
     <section class="intro"><div><p class="eyebrow">A permission-aware agent workflow</p><h2>Delegate with proof.<br><em>Not assumptions.</em></h2><p class="lead">An agent can propose the next step. Only an explicit grant can authorize it.</p></div><div class="meta-card"><div class="micro">POLICY ENGINE</div><strong>Deterministic gate</strong><span>v0.1 · simulation only</span></div></section>
     <div class="workspace">
       <section class="panel request-panel">
@@ -40,10 +40,12 @@
         </div>
       </section>
     </div>
+    <section class="panel account-panel"><div class="panel-head"><div><span class="step">04</span><h3>Private workspace</h3></div><span class="badge neutral">SIGN-IN DISABLED</span></div><p id="account-status">Sign-in is disabled in this public preview. No email will be requested or sent. Synthetic demo fixtures remain available.</p><div id="account-feedback" role="status" aria-live="polite"></div><div class="saved-head"><h3>Private fixtures</h3></div><p id="saved-help">Persistent accounts are not enabled in this preview. Synthetic scenario fixtures remain on this device only.</p></section>
     <section class="panel timeline"><div class="panel-head"><div><span class="step">03</span><h3>Handoff ledger</h3></div><span class="badge neutral">SESSION LEDGER</span></div><div id="ledger" class="ledger"><div class="ledger-empty">No handoff recorded yet. Run the scope check to create a session-only trace; refreshing clears this ledger.</div></div></section>
-    <footer><span>Handoff Studio · local simulation · 27 Oct 2026</span><span>PROPOSAL ≠ PERMISSION <i>●</i></span></footer>
+    <footer><span>Handoff Studio · synthetic scope demo · 2 Nov 2026</span><span>PROPOSAL ≠ PERMISSION <i>●</i></span></footer>
   </main>
 </div>
 <script type="module" src="src/app.js"></script>
+<script type="module" src="src/account.js"></script>
 </body>
 </html>
